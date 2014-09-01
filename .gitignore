@@ -31,3 +31,9 @@
 /target-eclipse
 
 .classpath
+.settings/org.eclipse.wst.common.project.facet.core.xml
+.settings/org.eclipse.jdt.groovy.core.prefs
+.settings/org.eclipse.core.resources.prefs
+.project
+.project
+.project

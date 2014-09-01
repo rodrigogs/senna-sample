@@ -2,7 +2,7 @@
 <html>
 	<head>
 	
-		<title><g:if env="development">500</g:if><g:else>Error</g:else></title>
+		<title><g:if env="development">Grails Runtime Exception</g:if><g:else>Error</g:else></title>
 		<meta name="layout" content="main">
 		<g:if env="development"><asset:stylesheet src="errors.css"/></g:if>
 		
@@ -21,7 +21,9 @@
 		</ul>
 		
 		<ul class="errors">
-			<li>500 internal server error</li>
+			<li>An error has occurred</li>
+			<li>Status: ${status}</li>
+			<li>Text: ${text}</li>
 		</ul>
 		
 		<asset:image src="bluescreen.jpg" width="90%" height="90%" />

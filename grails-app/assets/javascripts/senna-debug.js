@@ -344,7 +344,7 @@
         reject(error);
       };
     }).thenCatch(function(reason) {
-      xhr.abort();
+//FIXME      xhr.abort();
       throw reason;
     }).thenAlways(function() {
       clearTimeout(timeout);

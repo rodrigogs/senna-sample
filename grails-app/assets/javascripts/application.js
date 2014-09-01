@@ -36,9 +36,6 @@ if (typeof jQuery !== 'undefined') {
 
 if (typeof senna !== 'undefined') {
 	
-	var ERROR_404 = 'not found',
-		ERROR_500 = 'internal server error';
-	
 	var app = new senna.App();
 	app.setBasePath('/senna-sample');
 	app.addSurfaces([ 'application-status', 'page-body' ]);
@@ -54,19 +51,13 @@ if (typeof senna !== 'undefined') {
 			path: '/test/test2', handler: senna.HtmlScreen
 		},
 		{
+			path: /\/test\/error.*/, handler: senna.HtmlScreen
+		},
+		{
 			path: '/test/error404', handler: senna.HtmlScreen
 		},
 		{
 			path: '/test/error500', handler: senna.HtmlScreen
-		},
-		{
-			path: '/error', handler: senna.HtmlScreen
-		},
-		{
-			path: '/404', handler: senna.HtmlScreen
-		},
-		{
-			path: '/500', handler: senna.HtmlScreen
 		}
 	]);
 	
@@ -83,15 +74,11 @@ if (typeof senna !== 'undefined') {
 	app.handleNavigateError_ = function(path, nextScreen, err) {
 	    
 	    // Navigates to the error page
-		var status = err.xhr.statusText.toLowerCase();
-		if (status === ERROR_404) {
-			this.navigate(app.getBasePath() + '/404');
-		} else if (status === ERROR_500) {
-			this.navigate(app.getBasePath() + '/500');
-		} else {
-			this.navigate(app.getBasePath() + '/error');
-		}
-	    
+		var status = err.xhr.status;
+		var text = err.xhr.statusText;
+		
+		this.navigate(app.getBasePath() + '/test/error?status=' + status + '&text=' + text);
+		
 	    // Call super method
 	    senna.App.prototype.handleNavigateError_.call(this, path, nextScreen, err);
 	};

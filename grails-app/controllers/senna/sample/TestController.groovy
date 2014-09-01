@@ -12,6 +12,10 @@ class TestController {
 		
 	}
 	
+	def error() {
+		[status : params.status, text : params.text]
+	}
+	
 	def error404() {
 		response.sendError(404)
 	}
