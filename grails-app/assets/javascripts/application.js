@@ -37,27 +37,27 @@ if (typeof jQuery !== 'undefined') {
 if (typeof senna !== 'undefined') {
 	
 	var app = new senna.App();
-	app.setBasePath('/');
+	app.setBasePath('/senna-sample');
 	app.addSurfaces([ 'application-status', 'page-body' ]);
 //	app.addRoutes(new senna.Route(/.*/, senna.HtmlScreen));
 	app.addRoutes([
 		{
-			path: '', handler: senna.HtmlScreen
+			path: '/', handler: senna.HtmlScreen
 		},
 		{
-			path: 'test/test', handler: senna.HtmlScreen
+			path: '/test/test', handler: senna.HtmlScreen
 		},
 		{
-			path: 'test/test2', handler: senna.HtmlScreen
+			path: '/test/test2', handler: senna.HtmlScreen
 		},
 		{
-			path: /\test\/error.*/, handler: senna.HtmlScreen
+			path: /\/test\/error.*/, handler: senna.HtmlScreen
 		},
 		{
-			path: 'test/error404', handler: senna.HtmlScreen
+			path: '/test/error404', handler: senna.HtmlScreen
 		},
 		{
-			path: 'test/error500', handler: senna.HtmlScreen
+			path: '/test/error500', handler: senna.HtmlScreen
 		}
 	]);
 	
@@ -77,7 +77,7 @@ if (typeof senna !== 'undefined') {
 		var status = err.xhr.status;
 		var text = err.xhr.statusText;
 		
-		this.navigate(app.getBasePath() + 'test/error?status=' + status + '&text=' + text);
+		this.navigate(app.getBasePath() + '/test/error?status=' + status + '&text=' + text);
 		
 	    // Call super method
 	    senna.App.prototype.handleNavigateError_.call(this, path, nextScreen, err);
