@@ -6,7 +6,7 @@
 // to create separate JavaScript files as needed.
 //
 //= require jquery
-//= require senna-debug
+//= require senna
 //= require_self
 
 if (typeof jQuery !== 'undefined') {
@@ -70,16 +70,11 @@ if (typeof senna !== 'undefined') {
 	    senna.App.prototype.finalizeNavigate_.call(this, path, nextScreen, opt_replaceHistory);
 	};
 	
-	// Handle navigation errors
-	app.handleNavigateError_ = function(path, nextScreen, err) {
-	    
-	    // Navigates to the error page
-		var status = err.xhr.status;
-		var text = err.xhr.statusText;
-		
-		this.navigate(app.getBasePath() + '/test/error?status=' + status + '&text=' + text);
-		
-	    // Call super method
-	    senna.App.prototype.handleNavigateError_.call(this, path, nextScreen, err);
-	};
+	app.on('endNavigate', function(e) {
+	    if (e.error) { // Handle navigation errors
+			var status = e.error.xhr.status;
+			var text = e.error.xhr.statusText;
+			this.navigate(app.getBasePath() + '/test/error?status=' + status + '&text=' + text);	
+	    }
+	});
 }
